@@ -104,4 +104,36 @@ describe('UsersController', () => {
       expect(userController.createUser(body)).rejects.toThrowError();
     });
   })
+  describe('update',() => {
+    it('should update an user sucessfully', async () => {
+      const body: UpdateUserDto = new UserEntity({
+        name: 'user-updated',
+        cpf: '123.111.556-14',
+        cep: '29000-010',
+        publicSpace: 'perto da casinha',
+        state: 'SP',
+        city: 'São Paulo'
+      })
+      
+      const result = await userController.updateUser('1', body)
+
+      expect(result).toEqual(updatedUserEntity)
+      expect(userService.update).toHaveBeenCalledWith('1', body);
+    })
+    it('should throw an exception', () => {
+      const body: UpdateUserDto = new UserEntity({
+        name: 'user-updated',
+        cpf: '123.111.556-14',
+        cep: '29000-010',
+        publicSpace: 'perto da casinha',
+        state: 'SP',
+        city: 'São Paulo'
+      })
+
+      jest.spyOn(userService, 'update').mockRejectedValueOnce(new Error());
+
+      expect(userController.updateUser('1', body)).rejects.toThrowError();
+    })
+  })
+
 });
