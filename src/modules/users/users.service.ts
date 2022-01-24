@@ -13,6 +13,10 @@ export class UsersService {
 
     }
 
+    async findAll() {
+        return await this.userRepository.find();
+    }
+
     async create(data: CreateUserDto) {
         try{
             if(cpf.isValid(data.cpf)){
