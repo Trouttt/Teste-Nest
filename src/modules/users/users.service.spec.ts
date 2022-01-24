@@ -184,4 +184,23 @@ describe('UsersService', () => {
     })
   })
 
+  describe('delete', () => {
+    it('should delete a user successfully', async () => {
+      const result = await userService.delete('1');
+
+      expect(result).toBeUndefined();
+      expect(userRepository.softDelete).toHaveBeenCalledTimes(1);
+    })
+    it('should throw a not found exception', () => {
+      jest.spyOn(userRepository, 'findOneOrFail').mockRejectedValueOnce(new Error());
+
+      expect(userService.delete('1')).rejects.toThrowError(NotFoundException);
+    })
+
+    it('should throw an exception', () => {
+      jest.spyOn(userRepository, 'softDelete').mockRejectedValueOnce(new Error());
+
+      expect(userService.delete('1')).rejects.toThrowError();
+    })
+  })
 });
