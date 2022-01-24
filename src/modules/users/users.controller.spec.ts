@@ -59,5 +59,18 @@ describe('UsersController', () => {
     expect(userService).toBeDefined();
 
   });
+  describe('getAllUsers', () => {
+    it('should return a user list sucessfully', async () => {
+      const result = await userController.getAllUsers();
 
+      expect(result).toEqual(userEntityList);
+      expect(typeof result).toEqual('object');
+      expect(userService.findAll).toHaveBeenCalledTimes(1);
+    });
+    it('should throw an expection', () => {
+      jest.spyOn(userService, 'findAll').mockRejectedValueOnce(new Error());
+
+      expect(userController.getAllUsers()).rejects.toThrowError();
+    });
+  })
 });
