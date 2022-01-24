@@ -66,6 +66,22 @@ describe('UsersService', () => {
     })
   })
 
+  describe('findOne', () => {
+    it('should return a todo item successfully', async () => {
+      const result = await userService.findOne('1')
+
+      expect(result).toEqual(userEntityList[0]);
+      expect(userRepository.findOneOrFail).toHaveBeenCalledTimes(1);
+    })
+
+    it('should throw a not found expection', () => {
+      jest.spyOn(userRepository, 'findOneOrFail').mockRejectedValueOnce(new Error());
+
+      expect(userService.findOne('1')).rejects.toThrowError(NotFoundException);
+    })
+  })
+
+
   describe('create', () => {
     it('should create a new todo entity item successfully', async () => {
       const data: CreateUserDto = {
@@ -107,4 +123,5 @@ describe('UsersService', () => {
     })
 
   })
+
 });
