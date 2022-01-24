@@ -169,7 +169,7 @@ describe('UsersService', () => {
       expect(userService.update('1', data)).rejects.toThrowError(NotFoundException);
     })
 
-    it('should throw a not found exception', () => {
+    it('should throw a error', () => {
       const data: UpdateUserDto = new UserEntity({
         name: 'user-updated',
         cpf: '120.559.770-08',

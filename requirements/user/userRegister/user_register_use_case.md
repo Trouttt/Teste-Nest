@@ -6,10 +6,10 @@
 2. Sistema faz uma requisição para a URL da api
 3. Sistema efetua o registro
 
-# Exceção - Inseriu um CPF inválido
+# Exceção - Inseriu um CPF inválido - Válidado
 
 1. Sistema retorna um statusCode e uma mensagem de erro avisando que o cpf está inválido
 
-# Exceção - Inseriu um CPF já em uso
+# Exceção - Inseriu um CPF já em uso - Válidado
 
 1. Sistema retorna um statusCode e uma mensagem de erro avisando que o cpf já está em uso

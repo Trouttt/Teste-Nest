@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
-import { UsersModule } from './modules/users/users.module';
+import { CepModule } from './modules/cep/cep.module';
 
 @Module({
   imports: [ TypeOrmModule.forRootAsync({
@@ -17,12 +17,13 @@ import { UsersModule } from './modules/users/users.module';
         port: Number(ConfigService.get('DB_PORT', 5432)),
         username: ConfigService.get('DB_USERNAME','postgres'),
         password: ConfigService.get('DB_PASSWORD','postgres'),
-        database: ConfigService.get('DB_DATABASE','test-first'),
-        entities: [],
+        database: ConfigService.get('DB_DATABASE','test-firstt'),
+        entities: [__dirname + '/**/*.entity{.js,.ts}'],
+        autoLoadEntities: true,
         synchronize: true,
       }
     )
-  }), UsersModule,],
+  }), UsersModule, CepModule,],
   controllers: [AppController],
   providers: [AppService],
 })
