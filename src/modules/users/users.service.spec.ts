@@ -51,7 +51,20 @@ describe('UsersService', () => {
     expect(userService).toBeDefined();
     expect(userRepository).toBeDefined();
   });
+  describe('findAll', () => {
+    it('should return a user entity list successfully', async () => {
+      const result = await userService.findAll();
 
+      expect(result).toEqual(userEntityList);
+      expect(userRepository.find).toHaveBeenCalledTimes(1);
+
+    })
+    it('should throw an expection', () => {
+      jest.spyOn(userRepository, 'find').mockRejectedValueOnce(new Error());
+
+      expect(userService.findAll).rejects.toThrowError();
+    })
+  })
 
   describe('create', () => {
     it('should create a new todo entity item successfully', async () => {
@@ -93,5 +106,5 @@ describe('UsersService', () => {
       expect(userService.create(data)).rejects.toThrowError(BadRequestException);
     })
 
-  });
+  })
 });
