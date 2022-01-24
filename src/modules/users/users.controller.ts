@@ -23,4 +23,9 @@ export class UsersController {
         return await this.userService.update(id, body);
     }
 
+    @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async deleteUser(@Param('id', new ParseUUIDPipe()) id:string){
+        await this.userService.delete(id);
+    }
 }

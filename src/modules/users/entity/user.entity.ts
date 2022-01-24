@@ -8,7 +8,7 @@ export class UserEntity {
     @Column()
     name: string;
 
-    @Column()
+    @Column(({unique: true}))
     cpf: string;
 
     @Column()
@@ -31,4 +31,17 @@ export class UserEntity {
 
     @DeleteDateColumn( { name: 'deleted_at'} )
     deletedAt: string;
+
+    constructor(user?: Partial<UserEntity>) {
+        this.id = user?.id;
+        this.name = user?.name;
+        this.cpf = user?.cpf;
+        this.cep = user?.cep;
+        this.publicSpace = user?.publicSpace;
+        this.state = user?.state;
+        this.city = user?.city;
+        this.createdAt = user?.createdAt;
+        this.updatedAt = user?.updatedAt;
+        this.deletedAt = user?.deletedAt;
+    }
 }

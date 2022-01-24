@@ -136,4 +136,16 @@ describe('UsersController', () => {
     })
   })
 
+  describe('delete', () => {
+    it('should remove a user successfully', async () => {
+      const result = await userController.deleteUser('1');
+
+      expect(result).toBeUndefined();
+    })
+    it('should throw an exception', () => {
+      jest.spyOn(userService, 'delete').mockRejectedValueOnce(new Error());
+
+      expect(userController.deleteUser('1')).rejects.toThrowError();
+    })
+  })
 });
