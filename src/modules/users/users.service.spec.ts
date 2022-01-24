@@ -139,4 +139,49 @@ describe('UsersService', () => {
 
   })
 
+  describe('update', () => {
+    it('should update a user successfully', async () => {
+      const data: UpdateUserDto = new UserEntity({
+        name: 'user-updated',
+        cpf: '123.111.556-14',
+        cep: '29000-010',
+        publicSpace: 'perto da casinha',
+        state: 'SP',
+        city: 'São Paulo'
+      })
+      jest.spyOn(userRepository, 'save').mockResolvedValueOnce(updatedUserEntity);
+
+      const result = await userService.update('1', data);
+
+      expect(result).toEqual(updatedUserEntity);
+    })
+    it('should throw a not found exception', () => {
+      const data: UpdateUserDto = new UserEntity({
+        name: 'user-updated',
+        cpf: '120.559.770-08',
+        cep: '29000-010',
+        publicSpace: 'perto da casinha',
+        state: 'SP',
+        city: 'São Paulo'
+      })
+      jest.spyOn(userRepository, 'findOneOrFail').mockRejectedValueOnce(new Error());
+
+      expect(userService.update('1', data)).rejects.toThrowError(NotFoundException);
+    })
+
+    it('should throw a not found exception', () => {
+      const data: UpdateUserDto = new UserEntity({
+        name: 'user-updated',
+        cpf: '120.559.770-08',
+        cep: '29000-010',
+        publicSpace: 'perto da casinha',
+        state: 'SP',
+        city: 'São Paulo'
+      })
+      jest.spyOn(userRepository, 'save').mockRejectedValueOnce(new Error());
+
+      expect(userService.update('1', data)).rejects.toThrowError();
+    })
+  })
+
 });
