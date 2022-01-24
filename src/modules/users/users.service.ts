@@ -44,4 +44,13 @@ export class UsersService {
             throw new BadRequestException(error.message = `${cpf.isValid(data.cpf) ? 'CPF is already registered' : 'CPF is invalid'}`);        
         }
     }
+
+    async update(id: string,data: UpdateUserDto) {
+        const user = await this.findOne(id);
+        this.userRepository.merge(user, data);
+        return await this.userRepository.save(user);
+    }
+
+
+    
 }
