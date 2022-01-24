@@ -16,4 +16,11 @@ export class UsersController {
     async createUser(@Body() body: CreateUserDto){
         return await this.userService.create(body); 
     }
+
+    
+    @Put(':id')
+    async updateUser(@Param('id', new ParseUUIDPipe()) id: string, @Body() body: UpdateUserDto){
+        return await this.userService.update(id, body);
+    }
+
 }
