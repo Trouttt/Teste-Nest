@@ -73,4 +73,35 @@ describe('UsersController', () => {
       expect(userController.getAllUsers()).rejects.toThrowError();
     });
   })
+  describe('create', () => {
+    it('should create a new todo item sucessfully', async () => {
+      const body: CreateUserDto = {
+        name: 'user',
+        cpf: '123.111.556-11',
+        cep: '29000-000',
+        publicSpace: 'perto da casinha',
+        state: 'SP',
+        city: 'São Paulo'
+      }
+
+      const result = await userController.createUser(body);
+
+      expect(result).toEqual(newUserEntity);
+      expect(userService.create).toHaveBeenCalledWith(body);
+    })
+    it('should throw an expection', () => {
+      const body: CreateUserDto = {
+        name: 'user',
+        cpf: '123.111.556-11',
+        cep: '29000-000',
+        publicSpace: 'perto da casinha',
+        state: 'SP',
+        city: 'São Paulo'
+      }
+
+      jest.spyOn(userService, 'create').mockRejectedValueOnce(new Error());
+
+      expect(userController.createUser(body)).rejects.toThrowError();
+    });
+  })
 });
