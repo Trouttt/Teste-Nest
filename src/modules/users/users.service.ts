@@ -13,6 +13,15 @@ export class UsersService {
 
     }
 
+    async findUserByCpf(cpf: string){
+        try{
+            return await this.userRepository.findOneOrFail(({ cpf }));
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
+    }
+
+
     async findOne(id: string) {
         try{
             return await this.userRepository.findOneOrFail(id);
@@ -35,6 +44,4 @@ export class UsersService {
             throw new BadRequestException(error.message = `${cpf.isValid(data.cpf) ? 'CPF is already registered' : 'CPF is invalid'}`);        
         }
     }
-
-    
 }
