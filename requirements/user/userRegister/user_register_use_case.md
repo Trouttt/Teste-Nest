@@ -13,3 +13,7 @@
 # Exceção - Inseriu um CPF já em uso - Válidado
 
 1. Sistema retorna um statusCode e uma mensagem de erro avisando que o cpf já está em uso
+
+## Exceção - Não conseguiu efetuar o cadastro - Válidado
+
+1. Sistema retorna um statusCode e uma mensagem de erro avisando que deu erro ao efetuar o cadastro

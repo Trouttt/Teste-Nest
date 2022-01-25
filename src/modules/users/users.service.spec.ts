@@ -67,7 +67,7 @@ describe('UsersService', () => {
   })
 
   describe('findOne', () => {
-    it('should return a todo item successfully', async () => {
+    it('should return a user item successfully', async () => {
       const result = await userService.findOne('1')
 
       expect(result).toEqual(userEntityList[0]);
@@ -82,7 +82,7 @@ describe('UsersService', () => {
   })
 
   describe('findUserByCpf', () => {
-    it('should return a todo item successfully', async () => {
+    it('should return a user item successfully', async () => {
       const result = await userService.findUserByCpf('123.456.789-96')
 
 
@@ -98,7 +98,7 @@ describe('UsersService', () => {
   })
 
   describe('create', () => {
-    it('should create a new todo entity item successfully', async () => {
+    it('should create a new user entity item successfully', async () => {
       const data: CreateUserDto = {
         name: 'user-1', cpf: '120.559.770-08', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', 
       }

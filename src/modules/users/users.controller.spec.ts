@@ -74,7 +74,7 @@ describe('UsersController', () => {
     });
   })
   describe('create', () => {
-    it('should create a new todo item sucessfully', async () => {
+    it('should create a new user item sucessfully', async () => {
       const body: CreateUserDto = {
         name: 'user',
         cpf: '123.111.556-11',
