@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entity/user.entity';
-import { UsersController } from './users.controller';
-import { UsersService } from './users.service';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
 
 const userEntityList: UserEntity[] = [
   new UserEntity({ id: '1', name: 'user-1', cpf: '123.456.789-96', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', }),
@@ -32,14 +32,14 @@ const updatedUserEntity: UserEntity = new UserEntity({
 
 
 describe('UsersController', () => {
-  let userController: UsersController;
-  let userService: UsersService;
+  let userController: UserController;
+  let userService: UserService;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [UsersController],
+      controllers: [UserController],
       providers: [
         {
-          provide: UsersService,
+          provide: UserService,
           useValue: {
             findAll: jest.fn().mockResolvedValue(userEntityList),
             create: jest.fn().mockResolvedValue(newUserEntity),
@@ -50,8 +50,8 @@ describe('UsersController', () => {
       ]
     }).compile();
 
-    userController = module.get<UsersController>(UsersController);
-    userService = module.get<UsersService>(UsersService);
+    userController = module.get<UserController>(UserController);
+    userService = module.get<UserService>(UserService);
   });
 
   it('should be defined', () => {

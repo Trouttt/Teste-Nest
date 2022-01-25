@@ -8,7 +8,7 @@ import { UserEntity } from './entity/user.entity';
 import { cpf } from 'cpf-cnpj-validator'; 
 
 @Injectable()
-export class UsersService {
+export class UserService {
     constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>){
 
     }

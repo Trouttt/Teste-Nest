@@ -1,11 +1,11 @@
 import { Controller, Get, Post, Delete, Put, Body, ParseUUIDPipe, Param, HttpCode, HttpStatus } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 
 @Controller('api/users')
-export class UsersController {
-    constructor(private readonly userService: UsersService){}
+export class UserController {
+    constructor(private readonly userService: UserService){}
 
     @Get()
     async getAllUsers(){

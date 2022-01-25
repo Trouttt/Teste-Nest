@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entity/user.entity';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 
 const updatedUserEntity: UserEntity = new UserEntity({
   name: 'user-updated',
@@ -23,14 +23,14 @@ const userEntityList: UserEntity[] = [
   new UserEntity({ id: '3', name: 'user-3', cpf: '124.765.236-12', cep: '64433-512', publicSpace: 'em frente ao quiosque', state: 'MG', city: 'Cabiunas', }),
 ]
 
-describe('UsersService', () => {
-  let userService: UsersService;
+describe('UserService', () => {
+  let userService: UserService;
   let userRepository: Repository<UserEntity>;
 
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService, {
+      providers: [UserService, {
         provide: getRepositoryToken(UserEntity),
         useValue: {
           findOneOrFail: jest.fn().mockResolvedValue(userEntityList[0]),
@@ -43,7 +43,7 @@ describe('UsersService', () => {
       }],
     }).compile();
 
-    userService = module.get<UsersService>(UsersService);
+    userService = module.get<UserService>(UserService);
     userRepository = module.get<Repository<UserEntity>>(getRepositoryToken(UserEntity))
   });
 
