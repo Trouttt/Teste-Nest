@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CepEntity } from './entities/cep.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CepEntity])],
+  imports: [TypeOrmModule.forFeature([CepEntity, ])],
   controllers: [CepController],
   providers: [CepService],
   exports: [CepService]

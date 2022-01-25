@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ViaCepRequisition } from '../../utils/viacep';
 import { Repository } from 'typeorm';
@@ -11,31 +11,39 @@ export class CepService {
 
   }
   async create(createCepDto: CreateCepDto) {
+    try{
+      if(createCepDto.cep.length != 9 ){
+        throw new Error();
+      }
 
-    const data: CreateCepDto = {
-      cep: (await createCepDto).cep,
-      publicSpace: (await createCepDto).publicSpace,
-      state: (await createCepDto).state,
-      city: (await createCepDto).city,
-    };
-
-    return await this.cepRepository.save(this.cepRepository.create(data));
+      const data: CreateCepDto = {
+        cep: createCepDto.cep,
+        publicSpace: createCepDto.publicSpace,
+        state: createCepDto.state,
+        city: createCepDto.city,
+      };
+  
+      return await this.cepRepository.save(this.cepRepository.create(data));
+    } catch (error) {
+      throw new BadRequestException(error.message = 'CEP is invalid');
+    }
     
   }
 
+
   async findCep(cep: string) {
-  
     try{
       const cepFound = await this.cepRepository.findOne({cep});
+      
       if(cepFound){
+
         return cepFound
       } else {
+
         const cepRequisited = ViaCepRequisition(cep);
-
         if(!cepRequisited){
-          return new Error();
+          throw new Error();
         }
-
         return await this.create(await cepRequisited);
       }
     } catch  (error)  {

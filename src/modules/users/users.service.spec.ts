@@ -151,6 +151,8 @@ describe('UsersService', () => {
       })
       jest.spyOn(userRepository, 'save').mockResolvedValueOnce(updatedUserEntity);
 
+      
+
       const result = await userService.update('1', data);
 
       expect(result).toEqual(updatedUserEntity);
