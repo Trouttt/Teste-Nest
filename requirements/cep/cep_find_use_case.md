@@ -14,4 +14,4 @@
 
 # Exceção - Não conseguiu efetuar o cadastro - Válidado
 
-1. Sistema retorna um statusCode e uma mensagem de erro avisando que deu erro ao efetuar a remoção
+1. Sistema retorna um statusCode e uma mensagem de erro avisando que deu erro ao efetuar o cadastro
