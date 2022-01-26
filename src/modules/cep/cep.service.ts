@@ -36,10 +36,8 @@ export class CepService {
       const cepFound = await this.cepRepository.findOne({cep});
       
       if(cepFound){
-
         return cepFound
       } else {
-
         const cepRequisited = ViaCepRequisition(cep);
         if(!cepRequisited){
           throw new Error();

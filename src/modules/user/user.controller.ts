@@ -12,6 +12,11 @@ export class UserController {
         return await this.userService.findAll()
     }
 
+    @Get(':cpf')
+    async getUserByCpf(@Param('cpf') cpf:string){
+        return await this.userService.findUserByCpf(cpf);
+    }
+
     @Post()
     async createUser(@Body() body: CreateUserDto){
         return await this.userService.create(body); 
