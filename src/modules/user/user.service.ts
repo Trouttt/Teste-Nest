@@ -30,18 +30,19 @@ export class UserService {
         }
     }
     async findAll() {
-        return await this.userRepository.find();
+        return await this.userRepository.find({ select: ['id', 'name', 'cep', 'cpf', 'publicSpace', 'state', 'city', 'createdAt', 'updatedAt', 'deletedAt' ]});
     }
 
     async create(data: CreateUserDto) {
         try{
             if(cpf.isValid(data.cpf)){
+                console.log(data);
                 return await this.userRepository.save(this.userRepository.create(data))
             } else {
                 throw new Error();
             }
         } catch(error){
-            throw new BadRequestException(error.message = `${cpf.isValid(data.cpf) ? 'CPF is already registered' : 'CPF is invalid'}`);        
+            throw new BadRequestException(error.message = `${cpf.isValid(data.cpf) == true ? 'CPF is already exist' : error.message}`);        
         }
     }
 

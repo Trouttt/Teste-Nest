@@ -100,7 +100,7 @@ describe('UserService', () => {
   describe('create', () => {
     it('should create a new user entity item successfully', async () => {
       const data: CreateUserDto = {
-        name: 'user-1', cpf: '120.559.770-08', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', 
+        name: 'user-1',   cpf: '120.559.770-08', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', 
       }
       const result = await userService.create(data);
 
@@ -111,7 +111,7 @@ describe('UserService', () => {
 
     it('should throw an expection', () => {
       const data: CreateUserDto = {
-        name: 'user-1', cpf: '123.456.789-96', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', 
+        name: 'user-1',   cpf: '123.456.789-96', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', 
       }
 
       jest.spyOn(userRepository, 'save').mockRejectedValueOnce(new Error());
@@ -129,7 +129,7 @@ describe('UserService', () => {
     })
     it('should throw an expection if cpf is already registered', () => {
       const data: CreateUserDto = {
-        name: 'user-1', cpf: '505.116.180-42', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', 
+        name: 'user-1',  cpf: '505.116.180-42', cep: '27998-999', publicSpace: 'atrás da praça', state: 'SP', city: 'São Paulo', 
       }
 
       jest.spyOn(userRepository, 'save').mockRejectedValueOnce(new Error());
@@ -143,6 +143,7 @@ describe('UserService', () => {
     it('should update a user successfully', async () => {
       const data: UpdateUserDto = new UserEntity({
         name: 'user-updated',
+       
         cpf: '123.111.556-14',
         cep: '29000-010',
         publicSpace: 'perto da casinha',
@@ -160,6 +161,7 @@ describe('UserService', () => {
     it('should throw a not found exception', () => {
       const data: UpdateUserDto = new UserEntity({
         name: 'user-updated',
+        
         cpf: '120.559.770-08',
         cep: '29000-010',
         publicSpace: 'perto da casinha',

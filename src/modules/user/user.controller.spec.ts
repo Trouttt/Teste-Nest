@@ -77,6 +77,7 @@ describe('UsersController', () => {
     it('should create a new user item sucessfully', async () => {
       const body: CreateUserDto = {
         name: 'user',
+    
         cpf: '123.111.556-11',
         cep: '29000-000',
         publicSpace: 'perto da casinha',
