@@ -42,7 +42,7 @@ export class UserService {
                 throw new Error();
             }
         } catch(error){
-            throw new BadRequestException(error.message = `${cpf.isValid(data.cpf) == true ? 'CPF is already exist' : error.message}`);        
+            throw new BadRequestException(error.message = `${cpf.isValid(data.cpf) == true ? 'CPF is already exist' : 'Invalid data'}`);        
         }
     }
 

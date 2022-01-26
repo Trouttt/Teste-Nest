@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ViaCepRequisition } from '../../utils/viacep';
+import { ViaCepRequisition } from '../../helpers/viacep';
 import { Repository } from 'typeorm';
 import { CreateCepDto } from './dto/create-cep.dto';
 import { CepEntity } from './entities/cep.entity';
